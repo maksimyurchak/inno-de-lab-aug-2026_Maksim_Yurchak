@@ -1,19 +1,14 @@
 -- Select customers with at least 2 orders and delivery status = 'Delivered'
-WITH pre_table AS (
 SELECT 
-	CONCAT(c.first_name, ' ', c.last_name) AS full_name,
-	c.country,
-	(SELECT count(*) AS total_orders
-	FROM Orders AS o
-	WHERE o.customer_id = c.customer_id),
-	(SELECT sum(amount) AS total_amount
-	FROM Orders AS o
-	WHERE o.customer_id = c.customer_id)
+    CONCAT(c.first_name, ' ', c.last_name) AS full_name,
+    c.country,
+    COUNT(o.order_id) AS total_orders,
+    SUM(o.amount) AS total_amount
 FROM Customers AS c
 INNER JOIN Shippings AS s
-	ON c.customer_id = s.customer 
+	ON c.customer_id = s.customer
+INNER JOIN Orders AS o 
+	ON c.customer_id = o.customer_id
 WHERE s.status = 'Delivered'
-)
-SELECT *
-FROM pre_table
-WHERE total_orders > 1;
+GROUP BY c.first_name, c.last_name, c.country
+HAVING COUNT(o.order_id) > 1;
