@@ -8,5 +8,4 @@ INNER JOIN Orders AS o
 	ON c.customer_id = o.customer_id 
 WHERE o.amount = (
 	SELECT max(amount) FROM Orders
-	WHERE c.customer_id = o.customer_id
 );
