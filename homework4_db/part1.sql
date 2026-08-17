@@ -4,7 +4,7 @@ INSERT INTO Employees (FirstName, LastName, Department, Salary) VALUES
 ('Lara', 'Simpson', 'Engineering', 105000.00);
 
 -- Select all employees from table Employees
-SELECT * FROM Employees
+SELECT * FROM Employees;
 
 -- Select first and last name of employees from IT department
 SELECT FirstName, LastName
@@ -21,5 +21,5 @@ DELETE from Employees
 WHERE firstname = 'Eve' AND lastname = 'Davis';
 
 -- Check final changes
-SELECT * FROM Employees  
+SELECT * FROM Employees;
 

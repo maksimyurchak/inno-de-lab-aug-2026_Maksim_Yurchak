@@ -10,7 +10,7 @@ WHERE
 	AND e.lastname = 'Johnson'
 	AND ep.hoursworked > 150;
 	
--- Increase budget of project if at least one of the employees from IT
+-- Increase budget of project by 10% if at least one of the employees from IT
 UPDATE projects
 SET budget = budget * 1.10
 FROM employeeprojects AS ep
@@ -19,7 +19,7 @@ FROM employeeprojects AS ep
 WHERE
 	projects.projectid = ep.projectid 
 	AND 
-	e.department IN ('Senior IT');
+	e.department IN ('IT');
 
 -- For every EndDate without date set EndDate = StartDate + 1 year
 UPDATE projects 
