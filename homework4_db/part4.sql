@@ -22,12 +22,15 @@ two existing employees to it
 */
 BEGIN;
 
-INSERT INTO Projects (ProjectID, ProjectName, Budget, StartDate, EndDate) VALUES
-(4, 'Database support', 9999.99, '2026-07-01', '2026-08-01');
+WITH inserted AS (
+	INSERT INTO Projects (ProjectName, Budget, StartDate, EndDate) VALUES
+	('Database support', 10000.99, '2026-07-01', '2026-08-01')
+	RETURNING ProjectID
+)
 
-INSERT INTO EmployeeProjects (EmployeeID, ProjectID, HoursWorked) VALUES
-(1, 4, 101),
-(4, 4, 99);
+INSERT INTO EmployeeProjects (EmployeeID, ProjectID, HoursWorked)
+	SELECT 1, ProjectID, 101 FROM inserted
+	UNION ALL
+	SELECT 4, ProjectID, 99 FROM inserted;
 
 COMMIT; 
-
