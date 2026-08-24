@@ -11,6 +11,10 @@ elif operator == '-':
 elif operator == '*':
     print(f'Результат: {first_number} * {second_number} = {first_number * second_number}')
 elif operator == '/':
+
+    if second_number == 0:
+        raise ValueError('Cannot divide by zero')
+    
     print(f'Результат: {first_number} / {second_number} = {first_number / second_number}')
 else:
     raise ValueError('Wrong operator')
