@@ -9,24 +9,25 @@ system_telemetry = [
 ("srv_05", 95.1, 99, "online")
 ]
 
-# ignore servers with status: "offline"
-system_telemetry = [server for server in system_telemetry if server[3] != "offline"]
+# assign variables from system_telemetry and ignore servers with status: "offline"
+node_name, cpu_load, ram_usage, status = [], [], [], []
 
-# assign variables from system_telemetry
-node_name = [parameter[0] for parameter in system_telemetry]
-cpu_load = [parameter[1] for parameter in system_telemetry]
-ram_usage = [parameter[2] for parameter in system_telemetry]
-status = [parameter[3] for parameter in system_telemetry]
+for node_value, cpu_value, ram_value, status_value in system_telemetry:
+    if status_value != 'offline':
+        status.append(status_value)
+        cpu_load.append(cpu_value)
+        ram_usage.append(ram_value)
+        node_name.append(node_value)
 
 # Calculate summorized metrics
 active_servers = len(node_name)
-average_CPU_load = round(sum(cpu_load) / len(cpu_load), 2)
+average_cpu_load = round(sum(cpu_load) / len(cpu_load), 2)
 max_ram_usage = max(ram_usage)
 
 sum_metrics = {
     'active_nodes_count': active_servers,
     'metrics': {
-        'average_cpu': average_CPU_load,
+        'average_cpu': average_cpu_load,
         'max_ram': max_ram_usage
     }
 }
