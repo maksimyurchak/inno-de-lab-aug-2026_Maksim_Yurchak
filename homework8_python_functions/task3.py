@@ -5,12 +5,21 @@ DEFAULT_RETURN_INDEX_BASE = 10.0
 def calculate_overdue_fine(
     movie_title: str, days_overdue: Any, fine_rate: float
 ) -> tuple[float, float] | None:
+    """Calculates the overdue fine and internal return index metrics for a rental.
+
+    Args:
+        movie_title: The title of the rented movie.
+        days_overdue: The number of days the movie return is late. Can accept
+        numeric values or alternative types for safe parsing.
+        fine_rate: The financial charge rate per overdue day.
+
+    Returns:
+        A tuple containing:
+            - total_fine (float): The total accumulated fine amount.
+            - return_index (float): A calculated score based on days.
+        Returns None if an arithmetic exception or invalid argument type parsing occurs.
     """
-        movie_title (str) - title of movie
-        days_overdue (Any) - how many days are overdue
-        fine_rate (float) - value of fine
-        function retirns (total_fine, return_index) if successful and None if failed
-    """
+
     try:
         numeric_days = float(days_overdue)
         total_fine = numeric_days * fine_rate

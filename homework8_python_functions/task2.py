@@ -4,12 +4,17 @@ from typing import Any, Callable
 PERFORMANCE_LOG_PREFIX = "[PERF_LOG]"
 TIME_DECIMALS = 8
 
-genre_sales_data = list[dict[str, str | float]]  # data about revenue
+GenreSalesData = list[dict[str, str | float]]  # data about revenue
 
 def performance_logger(func: Callable[..., Any]) -> Callable[..., Any]:
     """
-    performance_logger - represents decorator. It Retuerns Callable[..., Any]
-    func: (Callable[..., Any]) - internal function of performance_logger
+    A decorator that measures and logs the execution time of a function.
+
+    Args:
+        func: The function whose performance needs to be tracked.
+
+    Returns:
+        A wrapper function  executes the inner function and prints its execution time.
     """
 
     def wrapper(*args: Any, **kwargs: Any) -> Any:
@@ -26,27 +31,33 @@ def performance_logger(func: Callable[..., Any]) -> Callable[..., Any]:
     return wrapper
 
 @performance_logger
-def get_sorted_report(data: genre_sales_data) -> genre_sales_data:
+def get_sorted_report(data: GenreSalesData) -> GenreSalesData:
     """
-    get_sorted_report sorts data by revenue descended
-    function returns updated genre_sales_data sorted by descended
+    Sorts genre sales records by revenue in descending order.
+
+    Args:
+        data: A list of dictionaries containing genre categories and sales metrics.
+
+    Returns:
+        A new list of sales records sorted by the total sales amount from
+        highest to lowest.
     """
 
     return sorted(data, key=lambda x: float(x["total_sales"]), reverse=True)
 
-test_set_1: genre_sales_data = [
+test_set_1: GenreSalesData = [
         {"category": "Action", "total_sales": 4311.85},
         {"category": "Animation", "total_sales": 4656.30},
         {"category": "Children", "total_sales": 3655.55},
 ]
 
-test_set_2: genre_sales_data = [
+test_set_2: GenreSalesData = [
         {"category": "Classics", "total_sales": 1200.10},
         {"category": "Comedy", "total_sales": 4000.00},
         {"category": "Documentary", "total_sales": 4000.00},
 ]
 
-test_set_3: genre_sales_data = [
+test_set_3: GenreSalesData = [
         {"category": "Drama", "total_sales": 500.00}
 ]
 

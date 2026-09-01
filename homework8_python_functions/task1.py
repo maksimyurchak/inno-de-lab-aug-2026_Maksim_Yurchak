@@ -1,11 +1,20 @@
 MAX_RENTAL_BATCH_LIMIT = 150.0
 
-def calculate_rental_batch(quantity: int, rental_rate: float, discount: float = 0.0) -> tuple:
+def calculate_rental_batch(quantity: int, rental_rate: float, discount: float = 0.0) -> tuple[float, bool]:
     """
-     quantity - represents quantity of discs
-     rental_rate - represents price of renting disc
-     discount - represents discount for specific genre 
-     function returns tuple of final sum and whether or not is limit exceeded
+    Calculates the total rental price and checks if it exceeds the limit.
+
+    Args:
+        quantity: The number of discs to rent.
+        rental_rate: The rental price per disc.
+        discount: The discount percentage applicable to a specific genre.
+            Defaults to 0.0.
+
+    Returns:
+        A tuple containing:
+            - final_sum (float): The calculated final cost, rounded to two decimal places.
+            - is_limit_exceeded (bool): True if the final cost is strictly greater
+              than MAX_RENTAL_BATCH_LIMIT, False otherwise.
     """
 
     final_sum = round(quantity * rental_rate * (1 - discount), 2)
