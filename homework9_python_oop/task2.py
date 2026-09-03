@@ -17,9 +17,12 @@ class AuditTrainee(Trainee):
 
 
 class Cohort:
-    def __init__(self, title: str, trainees: list = []):
+    def __init__(self, title: str, trainees: list = None):
         self.title = title  # name of the group
-        self.trainees = trainees  # list of students
+        if trainees is not None:
+            self.trainees = trainees
+        else:
+            self.trainees = []
 
     def add_trainee(self, trainee: Trainee) -> None:
         """add trainee to the group"""

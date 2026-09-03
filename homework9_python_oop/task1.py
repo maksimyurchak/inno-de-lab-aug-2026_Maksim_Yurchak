@@ -20,23 +20,23 @@ class Trainee:
 
     def do_homework(self) -> None:
         """Increases score by 1"""
-        self.__score += 1
+        self.score += 1
 
     def miss_homework(self) -> None:
         """Decreases score by 1"""
-        self.__score -= 1
+        self.score -= 1
 
     def visit_lecture(self) -> None:
         """Increases score by 1"""
-        self.__score += 1
+        self.score += 1
 
     def miss_lecture(self) -> None:
         """Decreases score by 1"""
-        self.__score -= 1
+        self.score -= 1
 
     def is_passing(self) -> bool:
         """Checking whether or not an intern passed"""
-        if self.__score >= self.passing_grade:
+        if self.score >= self.passing_grade:
             return True
         else:
             return False
